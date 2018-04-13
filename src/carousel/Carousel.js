@@ -64,7 +64,8 @@ export default class Carousel extends Component {
         swipeThreshold: PropTypes.number,
         useScrollView: PropTypes.bool,
         vertical: PropTypes.bool,
-        onSnapToItem: PropTypes.func
+        onSnapToItem: PropTypes.func,
+        removeClippedSubviews: PropTypes.bool
     };
 
     static defaultProps = {
@@ -94,7 +95,8 @@ export default class Carousel extends Component {
         shouldOptimizeUpdates: true,
         swipeThreshold: 20,
         useScrollView: !AnimatedFlatList,
-        vertical: false
+        vertical: false,
+        removeClippedSubviews: true
     }
 
     constructor (props) {
@@ -1138,7 +1140,8 @@ export default class Carousel extends Component {
             loopClonesPerSide,
             sliderWidth,
             sliderHeight,
-            vertical
+            vertical,
+            removeClippedSubviews
         } = this.props;
 
         const visibleItems = Math.ceil(vertical ?
@@ -1165,7 +1168,7 @@ export default class Carousel extends Component {
             directionalLockEnabled: true,
             pinchGestureEnabled: false,
             scrollsToTop: false,
-            removeClippedSubviews: true,
+            removeClippedSubviews: removeClippedSubviews,
             inverted: this._needsRTLAdaptations(),
             // renderToHardwareTextureAndroid: true,
             ...specificProps
